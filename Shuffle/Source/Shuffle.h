@@ -1,6 +1,8 @@
 #pragma once
 
+#include <format>
 #include <iostream>
+#include <string>
 #include <xstring>
 #include <vector>
 
@@ -10,9 +12,11 @@ public:
 	Shuffle();
 	static Shuffle init();
 	void deinit();
-	void run();
-	void add_folder(const std::wstring& path);
-	static std::wstring version_info();
+
+	void run();										// run
+	void add_folder(const std::wstring& folderPath);		// add <arg>
+	void print_version_info() const;				// version
+	void print_help_message() const;				// help
 
 private:
 	static std::vector<std::wstring> ParseFolderPathFrom(const std::wstring& fileToParse);
@@ -20,7 +24,5 @@ private:
 	std::wstring GenSearchQuery();
 
 private:
-	static const std::wstring m_VersionInfo;
-
 	std::vector<std::wstring> m_FolderPathCache;
 };

@@ -1,15 +1,8 @@
 #include "Shuffle.h"
 
-#include <format>
 #include <fstream>
-#include <string>
 
 #include "Everything.h"
-
-const std::wstring Shuffle::m_VersionInfo =
-	L"Shuffle v0.1.0\n"
-	L"Copyright(c) 2024 Toufiq A. Shishir\n"
-	L"https ://github.com/toufiq7r/shuffle\n\n";
 
 Shuffle::Shuffle() : m_FolderPathCache(Shuffle::ParseFolderPathFrom(L"scanner.in"))
 {
@@ -58,9 +51,25 @@ void Shuffle::add_folder(const std::wstring& folderPath)
 	Shuffle::WriteFolderPathOn(L"scanner.in", folderPath);
 }
 
-std::wstring Shuffle::version_info()
+void Shuffle::print_version_info() const 
 {
-	return Shuffle::m_VersionInfo;
+	std::wcout << 
+		L"Shuffle v0.1.1\n"
+		L"Copyright(c) 2024 Toufiq A. Shishir\n"
+		L"https ://github.com/toufiq7r/shuffle\n\n"
+	<< std::endl;
+}
+
+void Shuffle::print_help_message() const
+{
+	print_version_info();
+
+	std::wcout << L"Usage: cli app shuffle [option] <arg>" << std::endl;
+	std::wcout << L"Options:" << std::endl;
+	std::wcout << L"  play              Play the game" << std::endl;
+	std::wcout << L"  add <arg>         Add a folder path as <arg> item" << std::endl;
+	std::wcout << L"  version           Print program version info" << std::endl;
+	std::wcout << L"  help              Print help message" << std::endl;
 }
 
 std::vector<std::wstring> Shuffle::ParseFolderPathFrom(const std::wstring& fileToParse)
