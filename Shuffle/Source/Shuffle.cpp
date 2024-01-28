@@ -1,5 +1,7 @@
 #include "Shuffle.h"
 
+#include <Windows.h>
+#include <shellapi.h>
 #include <fstream>
 
 #include "Everything.h"
@@ -39,11 +41,10 @@ void Shuffle::run()
 
 	std::wstring file_name = Everything_GetResultFileName(i);
 	std::wstring file_path = Everything_GetResultPath(i);
-	std::wstring cmd = L"\"" + file_path + L"\\" + file_name + L"\"";
+	std::wstring exact_path = L"\"" + file_path + L"\\" + file_name + L"\"";
 
-	std::wcout << cmd << std::endl;
-
-	_wsystem(cmd.c_str());
+	std::wcout << "\nInfo: Opening - " << exact_path << std::endl;
+	ShellExecute(NULL, L"open", exact_path.c_str(), NULL, NULL, SW_SHOWNORMAL);
 }
 
 void Shuffle::add_folder(const std::wstring& folderPath)
